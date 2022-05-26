@@ -4,10 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 @Getter @Setter @ToString
 @Entity(name = "books")
 public class Book {
@@ -19,4 +17,6 @@ public class Book {
     private int rating;
     private String description;
 
+    @ManyToOne
+    private Publisher publisher;
 }

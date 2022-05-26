@@ -1,7 +1,9 @@
 package com.piotrgrochowiecki.bookstore.controller;
 
+import com.piotrgrochowiecki.bookstore.dao.PublisherDao;
 import com.piotrgrochowiecki.bookstore.model.Book;
 import com.piotrgrochowiecki.bookstore.dao.BookDao;
+import com.piotrgrochowiecki.bookstore.model.Publisher;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BookController {
 
     private final BookDao bookDao;
+    private final PublisherDao publisherDao;
 
     @GetMapping("add")
     @ResponseBody
@@ -23,6 +26,10 @@ public class BookController {
         book.setTitle("Thinking in Java");
         book.setRating(8);
         book.setDescription("Very good book for learning Java");
+        Publisher publisher = new Publisher();
+        publisher.setName("Publishing house DEF");
+        publisherDao.save(publisher);
+        book.setPublisher(publisher);
         bookDao.save(book);
         return "Id of added book is " + book.getId();
     }
