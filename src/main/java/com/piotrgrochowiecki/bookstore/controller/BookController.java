@@ -1,8 +1,10 @@
 package com.piotrgrochowiecki.bookstore.controller;
 
-import com.piotrgrochowiecki.bookstore.dao.PublisherDao;
-import com.piotrgrochowiecki.bookstore.model.Book;
+import com.piotrgrochowiecki.bookstore.dao.AuthorDao;
 import com.piotrgrochowiecki.bookstore.dao.BookDao;
+import com.piotrgrochowiecki.bookstore.dao.PublisherDao;
+import com.piotrgrochowiecki.bookstore.model.Author;
+import com.piotrgrochowiecki.bookstore.model.Book;
 import com.piotrgrochowiecki.bookstore.model.Publisher;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/books/")
@@ -18,18 +23,30 @@ public class BookController {
 
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
+    private final AuthorDao authorDao;
 
-    @GetMapping("add")
+    @GetMapping("add/{firstAuthorId}/{secondAuthorId}")
     @ResponseBody
-    public String add(){
+    public String add(@PathVariable long firstAuthorId, @PathVariable long secondAuthorId){
         Book book = new Book();
-        book.setTitle("Thinking in Java");
+        book.setTitle("The Pragmatic Programmer");
         book.setRating(8);
-        book.setDescription("Very good book for learning Java");
+        book.setDescription("From Journeyman to Master is a book about computer programming and software engineering, " +
+                "written by Andrew Hunt and David Thomas and published in October 1999. It is used as a textbook in" +
+                " related university courses.");
+
         Publisher publisher = new Publisher();
-        publisher.setName("Publishing house DEF");
+        publisher.setName("Publishing house GHI");
         publisherDao.save(publisher);
         book.setPublisher(publisher);
+
+        Author author1 = authorDao.findById(firstAuthorId);
+        Author author2 = authorDao.findById(secondAuthorId);
+        List<Author> authors = new ArrayList<>();
+        authors.add(author1);
+        authors.add(author2);
+        book.setAuthors(authors);
+
         bookDao.save(book);
         return "Id of added book is " + book.getId();
     }
