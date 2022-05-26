@@ -1,4 +1,4 @@
-package com.piotrgrochowiecki.bookstore.repository;
+package com.piotrgrochowiecki.bookstore.dao;
 
 import com.piotrgrochowiecki.bookstore.model.Book;
 import org.springframework.stereotype.Repository;

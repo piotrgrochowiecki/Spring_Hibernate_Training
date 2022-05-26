@@ -1,7 +1,7 @@
 package com.piotrgrochowiecki.bookstore.controller;
 
 import com.piotrgrochowiecki.bookstore.model.Book;
-import com.piotrgrochowiecki.bookstore.repository.BookDao;
+import com.piotrgrochowiecki.bookstore.dao.BookDao;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
