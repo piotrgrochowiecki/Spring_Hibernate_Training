@@ -1,15 +1,15 @@
 package com.piotrgrochowiecki.bookstore.repository;
 
 import com.piotrgrochowiecki.bookstore.model.Book;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
 @Transactional
-public class BookRepository {
+public class BookDao {
 
     @PersistenceContext
     EntityManager entityManager;
