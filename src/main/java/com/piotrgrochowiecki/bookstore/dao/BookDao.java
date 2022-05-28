@@ -1,6 +1,8 @@
 package com.piotrgrochowiecki.bookstore.dao;
 
+import com.piotrgrochowiecki.bookstore.model.Author;
 import com.piotrgrochowiecki.bookstore.model.Book;
+import com.piotrgrochowiecki.bookstore.model.Publisher;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,5 +45,22 @@ public class BookDao {
         query.setParameter("rating", rating);
         List<Book> bookList = query.getResultList();
         return bookList;
+    }
+
+    public List<Book> findBookWithAnyPublisher() {
+        Query query = entityManager.createQuery("SELECT b FROM Book b JOIN b.publisher");
+        return query.getResultList();
+    }
+
+    public List<Book> findBookWithPublisher(Publisher publisher) {
+        Query query = entityManager.createQuery("SELECT b FROM Book b WHERE b.publisher in :publishers");
+        query.setParameter("publishers", publisher);
+        return query.getResultList();
+    }
+
+    public List<Book> findBookWithAuthor(Author author) {
+        Query query = entityManager.createQuery("SELECT b FROM Book b WHERE b.publisher in :authors");
+        query.setParameter("authors", author);
+        return query.getResultList();
     }
 }
