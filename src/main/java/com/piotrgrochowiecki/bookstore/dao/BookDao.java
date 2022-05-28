@@ -4,7 +4,9 @@ import com.piotrgrochowiecki.bookstore.model.Book;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 
@@ -34,5 +36,12 @@ public class BookDao {
     public List<Book> findAll() {
         Query query = entityManager.createQuery("SELECT b FROM com.piotrgrochowiecki.bookstore.model.Book b", Book.class);
         return query.getResultList();
+    }
+
+    public List<Book> findAllByRating(int rating) {
+        Query query = entityManager.createQuery("SELECT b FROM Book b WHERE b.rating = :rating");
+        query.setParameter("rating", rating);
+        List<Book> bookList = query.getResultList();
+        return bookList;
     }
 }

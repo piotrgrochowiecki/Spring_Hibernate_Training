@@ -82,4 +82,12 @@ public class BookController {
         return "findAll";
     }
 
+    @GetMapping("/findByRating/{rating}")
+    @ResponseBody
+    public String findByRating(@PathVariable int rating) {
+        List<Book> bookList = bookDao.findAllByRating(rating);
+        bookList.forEach(System.out::println);
+        return "findByRating";
+    }
+
 }
