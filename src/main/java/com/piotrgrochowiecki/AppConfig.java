@@ -13,7 +13,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.piotrgrochowiecki")
+@ComponentScan("com.piotrgrochowiecki.bookstore")
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
 

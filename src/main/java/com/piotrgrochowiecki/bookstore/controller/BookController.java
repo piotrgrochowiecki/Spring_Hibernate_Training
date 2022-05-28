@@ -74,4 +74,12 @@ public class BookController {
         return "Title of the book with id " + id + " has been updated";
     }
 
+    @GetMapping("/findAll")
+    @ResponseBody
+    public String findAll() {
+        List<Book> bookList = bookDao.findAll();
+        bookList.forEach(System.out::println);
+        return "findAll";
+    }
+
 }
