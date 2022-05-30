@@ -8,9 +8,8 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @AllArgsConstructor
@@ -93,9 +92,17 @@ public class PersonController {
 //        return "New person has been added";
 //    }
 
+//    @PostMapping("/addByForm")
+//    public String performCreateByForm(HttpServletRequest request) {
+//        logger.info("sent login: {}", request.getParameter("login"));
+//        return "/person-form.jsp";
+//    }
+
     @PostMapping("/addByForm")
-    public String performCreateByForm(HttpServletRequest request) {
-        logger.info("sent login: {}", request.getParameter("login"));
-        return "/person-form.jsp";
+    @ResponseBody
+    public String createByForm(Model model) {
+        model.addAttribute("person", new Person());
+//        personDao.save(person);
+        return "New person has been added";
     }
 }

@@ -13,11 +13,11 @@
     <title>Person Form</title>
 </head>
 <body>
-<form method="post">
-    Login: <input name="login" type="text">
-    Password: <input name="password" type="password">
-    Email: <input name="email" type="email">
+<form:form method="post" action="/person/addByForm" modelAttribute="person">
+    Login: <form:input type="text" path="login"/>
+    Password: <form:input type="password" path="password"/>
+    Email: <form:input type="email" path="email"/>
     <input type="submit">
-</form>
+</form:form>
 </body>
 </html>
