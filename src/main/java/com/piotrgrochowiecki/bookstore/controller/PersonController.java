@@ -5,11 +5,11 @@ import com.piotrgrochowiecki.bookstore.dao.PersonDetailsDao;
 import com.piotrgrochowiecki.bookstore.model.Person;
 import com.piotrgrochowiecki.bookstore.model.PersonDetails;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
@@ -18,6 +18,7 @@ public class PersonController {
 
     private PersonDao personDao;
     private PersonDetailsDao personDetailsDao;
+    private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
 
     @GetMapping("add/{login}/{password}/{email}/{firstName}/{lastName}/{streetNumber}/{street}/{city}")
     @ResponseBody
@@ -70,5 +71,24 @@ public class PersonController {
         person.setPassword(password);
         personDao.update(person);
         return "Password of person with id " + id + " has been updated";
+    }
+
+    @RequestMapping("/addByForm")
+    public String addByForm() {
+        return "/person-form.jsp";
+    }
+
+    @PostMapping("/addByForm")
+    @ResponseBody
+    public String createByForm(@RequestParam String login,
+                               @RequestParam String password,
+                               @RequestParam String email,
+                               Model model) {
+        Person person = new Person();
+        person.setLogin(login);
+        person.setPassword(password);
+        person.setEmail(email);
+        personDao.save(person);
+        return "New person has been added";
     }
 }

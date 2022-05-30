@@ -23,5 +23,6 @@ public class Book {
     private Publisher publisher;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Author> authors = new ArrayList<>();
 }

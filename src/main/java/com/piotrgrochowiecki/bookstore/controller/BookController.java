@@ -7,6 +7,8 @@ import com.piotrgrochowiecki.bookstore.model.Author;
 import com.piotrgrochowiecki.bookstore.model.Book;
 import com.piotrgrochowiecki.bookstore.model.Publisher;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,7 @@ public class BookController {
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
-
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
     @GetMapping("add/{firstAuthorId}/{secondAuthorId}")
     @ResponseBody
     public String add(@PathVariable long firstAuthorId, @PathVariable long secondAuthorId){
@@ -78,7 +80,7 @@ public class BookController {
     @ResponseBody
     public String findAll() {
         List<Book> bookList = bookDao.findAll();
-        bookList.forEach(System.out::println);
+        bookList.forEach(book -> logger.info(book.toString()));
         return "findAll";
     }
 
