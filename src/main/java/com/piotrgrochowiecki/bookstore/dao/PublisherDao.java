@@ -33,7 +33,7 @@ public class PublisherDao {
     }
 
     public List<Publisher> findAll() {
-        Query query = entityManager.createQuery("SELECT p FROM Publisher p");
+        Query query = entityManager.createQuery("SELECT p FROM com.piotrgrochowiecki.bookstore.model.Publisher p", Publisher.class);
         return query.getResultList();
     }
 
