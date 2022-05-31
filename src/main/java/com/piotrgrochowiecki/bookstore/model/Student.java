@@ -2,9 +2,10 @@ package com.piotrgrochowiecki.bookstore.model;
 
 import lombok.*;
 
+import java.util.Collection;
 import java.util.List;
 @Setter @Getter @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor @ToString
 public class Student {
 
     String firstName;
@@ -16,6 +17,6 @@ public class Student {
     @ToString.Exclude
     List<String> programmingSkills;
     @ToString.Exclude
-    List<String> hobbies;
+    Collection<StudentHobby> hobbies;
 
 }

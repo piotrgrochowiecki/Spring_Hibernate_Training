@@ -1,14 +1,14 @@
 package com.piotrgrochowiecki.bookstore.controller;
 
 import com.piotrgrochowiecki.bookstore.model.Student;
+import com.piotrgrochowiecki.bookstore.model.StudentHobby;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 @Controller
 @RequestMapping("student")
@@ -25,19 +25,23 @@ public class StudentController {
     }
 
     @ModelAttribute("hobbies")
-    public List<String> hobbies() {
-        return Arrays.asList("Skiing", "Sailing", "Cycling", "Trekking", "Running");
+    public Collection<StudentHobby> hobbies() {
+        List<StudentHobby> studentHobbyList = new ArrayList<>();
+        studentHobbyList.add(new StudentHobby(1, "skiing"));
+        studentHobbyList.add(new StudentHobby(2, "cycling"));
+        studentHobbyList.add(new StudentHobby(3, "sailing"));
+        return studentHobbyList;
     }
 
-    @RequestMapping("addByForm")
-    public String returnView() {
-        return "student-form";
+    @GetMapping("addByForm")
+    public String showStudentAddForm(Model model) {
+        model.addAttribute("student", new Student());
+        return "/student-form.jsp";
     }
 
     @PostMapping("addByForm")
     @ResponseBody
-    public String create(Model model) {
-        model.addAttribute("student", new Student());
-        return "Thank you";
+    public String create(Student student) {
+        return "Typed student is: " + student.toString();
     }
 }
