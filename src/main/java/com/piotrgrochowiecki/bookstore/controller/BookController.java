@@ -10,12 +10,12 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -77,11 +77,10 @@ public class BookController {
     }
 
     @GetMapping("/findAll")
-    @ResponseBody
-    public String findAll() {
+    public String findAll(Model model) {
         List<Book> bookList = bookDao.findAll();
-        bookList.forEach(book -> logger.info(book.toString()));
-        return "findAll";
+        model.addAttribute("bookList", bookList);
+        return "/bookListView.jsp";
     }
 
     @GetMapping("/findByRating/{rating}")
@@ -90,6 +89,35 @@ public class BookController {
         List<Book> bookList = bookDao.findAllByRating(rating);
         bookList.forEach(System.out::println);
         return "findByRating";
+    }
+
+    @GetMapping("/deleteConfirmation/{id}")
+    public String deleteConfirmation(@PathVariable Long id, Model model) {
+        Book book = bookDao.findById(id);
+        model.addAttribute("book", book);
+        return "/bookDeleteConfirmationView.jsp";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Book book = bookDao.findById(id);
+        model.addAttribute("book", book);
+        return "/bookEditView.jsp";
+    }
+
+    @ModelAttribute("publishers")
+    public Collection<Publisher> publishers() {
+        return this.publisherDao.findAll();
+    }
+
+    @PostMapping("/editConfirmation")
+    @ResponseBody
+    public String editHandle(@ModelAttribute("book") Book book, BindingResult result) {
+        if (result.hasErrors()) {
+            return "Something went wrong!";
+        }
+        bookDao.update(book);
+        return "Book has been updated!";
     }
 
 }
