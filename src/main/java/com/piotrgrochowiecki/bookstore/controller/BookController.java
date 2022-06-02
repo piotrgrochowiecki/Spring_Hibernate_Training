@@ -120,4 +120,9 @@ public class BookController {
         return "Book has been updated!";
     }
 
+    @ModelAttribute("authors")
+    public Collection<Author> authors() {
+        return this.authorDao.findAll();
+    }
+
 }

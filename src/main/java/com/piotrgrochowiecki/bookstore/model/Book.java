@@ -22,7 +22,7 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Author> authors = new ArrayList<>();
 }

@@ -21,6 +21,7 @@ Edit book:
     Rating: <form:input path="rating"/><br>
     Description: <form:textarea path="description" cols="100" rows="20"/><br>
     Publisher: <form:select path="publisher.id" items="${publishers}" itemValue="id" itemLabel="name"/><br>
+    Authors: <form:select path="authors" items="${authors}" itemValue="id" itemLabel="lastName"/><br>
     <input type="submit">
 </form:form>
 </body>

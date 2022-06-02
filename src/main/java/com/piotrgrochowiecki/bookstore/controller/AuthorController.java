@@ -26,6 +26,12 @@ public class AuthorController {
         return "New author with id " + author.getId() + " has been added.";
     }
 
+    @RequestMapping("/findAll")
+    @ResponseBody
+    public String findAll() {
+        return authorDao.findAll().toString();
+    }
+
     @GetMapping("/show/{id}")
     @ResponseBody
     public String show(@PathVariable long id) {

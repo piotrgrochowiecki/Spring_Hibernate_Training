@@ -33,7 +33,7 @@ public class AuthorDao {
     }
 
     public List<Author> findAll() {
-        Query query = entityManager.createQuery("SELECT a FROM Author a");
+        Query query = entityManager.createQuery("SELECT a FROM com.piotrgrochowiecki.bookstore.model.Author a", Author.class);
         return query.getResultList();
     }
 }
