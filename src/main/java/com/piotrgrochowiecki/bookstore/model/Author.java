@@ -23,7 +23,7 @@ public class Author {
         return firstName + " " + lastName;
     }
 
-    @ManyToMany(mappedBy = "authors")
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Book> books = new ArrayList<>();
 }
