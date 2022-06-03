@@ -11,13 +11,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Editing of ${author.fullName}</title>
+    <title>Editing of ${publisher.name}</title>
 </head>
 <body>
-Edit author:
-<form:form modelAttribute="author" method="post" action="/authors/editConfirmation">
-    First Name: <form:input path="firstName"/><br>
-    Last Name: <form:input path="lastName"/><br>
+Edit publisher:
+<form:form modelAttribute="publisher" method="post" action="/publishers/editConfirmation">
+    First Name: <form:input path="name"/><br>
     <input type="submit">
 </form:form>
 </body>

@@ -20,7 +20,7 @@ public class PublisherDao {
         entityManager.persist(publisher);
     }
 
-    public Publisher findById(long id) {
+    public Publisher findById(Long id) {
         return entityManager.find(Publisher.class, id);
     }
 

@@ -4,10 +4,11 @@ import com.piotrgrochowiecki.bookstore.dao.PublisherDao;
 import com.piotrgrochowiecki.bookstore.model.Publisher;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -31,21 +32,52 @@ public class PublisherController {
         return publisherDao.findById(id).toString();
     }
 
-    @GetMapping("/delete/{id}")
-    @ResponseBody
-    public String delete(@PathVariable long id) {
-        Publisher publisher = publisherDao.findById(id);
-        publisherDao.delete(publisher);
-        return "Publisher with id " + id + " has been deleted";
-    }
-
     @GetMapping("/updateName/{id}/{name}")
     @ResponseBody
     public String updateName(@PathVariable long id, @PathVariable String name) {
         Publisher publisher = publisherDao.findById(id);
         publisher.setName(name);
         publisherDao.update(publisher);
-        return "Publisher with id " + publisher.getId() + " has been updated";
+        return "Publisher " + publisher.getName() + " has been updated";
+    }
+
+    @RequestMapping("/findAll")
+    public String findAll(Model model) {
+        List<Publisher> publisherList = publisherDao.findAll();
+        model.addAttribute("publisherList", publisherList);
+        return "/publisherListView.jsp";
+    }
+
+    @GetMapping("/deleteConfirmation/{id}")
+    public String deleteConfirmation(@PathVariable Long id, Model model) {
+        Publisher publisher = publisherDao.findById(id);
+        model.addAttribute("publisher", publisher);
+        return "/publisherDeleteConfirmationView.jsp";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Publisher publisher = publisherDao.findById(id);
+        model.addAttribute("publisher", publisher);
+        return "/publisherEditView.jsp";
+    }
+
+    @PostMapping("/editConfirmation")
+    @ResponseBody
+    public String editHandle(@ModelAttribute("publisher") Publisher publisher, BindingResult result) {
+        if (result.hasErrors()) {
+            return "Something went wrong!";
+        }
+        publisherDao.update(publisher);
+        return "Publisher has been updated!";
+    }
+    
+    @GetMapping("/delete/{id}")
+    @ResponseBody
+    public String delete(@PathVariable Long id) {
+        Publisher publisher = publisherDao.findById(id);
+        publisherDao.delete(publisher);
+        return "Publisher with id " + id + " has been deleted";
     }
 
 }

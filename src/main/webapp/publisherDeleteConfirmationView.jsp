@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA Ultimate.
   User: piotr
   Date: 6/3/2022
-  Time: 12:18 PM
+  Time: 12:11 PM
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -11,14 +11,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Editing of ${author.fullName}</title>
+    <title>Delete Confirmation</title>
 </head>
 <body>
-Edit author:
-<form:form modelAttribute="author" method="post" action="/authors/editConfirmation">
-    First Name: <form:input path="firstName"/><br>
-    Last Name: <form:input path="lastName"/><br>
-    <input type="submit">
-</form:form>
+<c:out value="Are you sure you want to delete publisher ${publisher.name}?"></c:out>
+<a href="/publishers/delete/${publisher.id}">Yes, delete</a>
+<a href="/publishers/findAll">No, go back to publishers list</a>
 </body>
 </html>
