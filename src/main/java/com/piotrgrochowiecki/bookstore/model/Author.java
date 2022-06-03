@@ -18,6 +18,11 @@ public class Author {
     private String firstName;
     private String lastName;
 
+    @Transient
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     @ManyToMany(mappedBy = "authors")
     @ToString.Exclude
     private List<Book> books = new ArrayList<>();
