@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -49,13 +50,12 @@ public class AuthorController {
     }
 
     @PostMapping("/editConfirmation")
-    @ResponseBody
-    public String editHandle(@ModelAttribute("author") Author author, BindingResult result) {
+    public String editHandle(@ModelAttribute("author") @Valid Author author, BindingResult result) {
         if (result.hasErrors()) {
-            return "Something went wrong!";
+            return "/authorEditView.jsp";
         }
         authorDao.update(author);
-        return "Book has been updated!";
+        return "redirect:/authors/findAll";
     }
 
     @GetMapping("/show/{id}")
