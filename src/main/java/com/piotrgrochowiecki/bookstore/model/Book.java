@@ -36,4 +36,7 @@ public class Book {
     @ToString.Exclude
     @NotNull
     private List<Author> authors = new ArrayList<>();
+
+    @ManyToOne
+    private Category category;
 }
