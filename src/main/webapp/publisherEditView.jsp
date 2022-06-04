@@ -16,7 +16,9 @@
 <body>
 Edit publisher:
 <form:form modelAttribute="publisher" method="post" action="/publishers/editConfirmation">
-    First Name: <form:input path="name"/><br>
+    Name: <form:input path="name"/> <form:errors path="name"/> <br>
+    NIP: <form:input path="nip"/> <form:errors path="nip"/> <br>
+    REGON: <form:input path="regon"/> <form:errors path="regon"/> <br>
     <input type="submit">
 </form:form>
 </body>

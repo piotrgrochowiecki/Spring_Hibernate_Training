@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.pl.PESEL;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Pattern(regexp = "^[a-zA-Z]+$")
     private String firstName;
     @NotBlank
+    @Pattern(regexp = "^[a-zA-Z]+$")
     private String lastName;
     @PESEL
     private String pesel;

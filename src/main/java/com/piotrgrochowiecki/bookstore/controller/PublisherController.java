@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -63,13 +64,12 @@ public class PublisherController {
     }
 
     @PostMapping("/editConfirmation")
-    @ResponseBody
-    public String editHandle(@ModelAttribute("publisher") Publisher publisher, BindingResult result) {
+    public String editHandle(@ModelAttribute("publisher") @Valid Publisher publisher, BindingResult result) {
         if (result.hasErrors()) {
-            return "Something went wrong!";
+            return "/publisherEditView.jsp";
         }
         publisherDao.update(publisher);
-        return "Publisher has been updated!";
+        return "redirect:/publishers/findAll";
     }
     
     @GetMapping("/delete/{id}")

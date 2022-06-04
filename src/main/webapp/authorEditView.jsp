@@ -16,8 +16,8 @@
 <body>
 Edit author:
 <form:form modelAttribute="author" method="post" action="/authors/editConfirmation">
-    First Name: <form:input path="firstName"/><br>
-    Last Name: <form:input path="lastName"/><br>
+    First Name: <form:input path="firstName"/> <form:errors path="firstName"/> <br>
+    Last Name: <form:input path="lastName"/> <form:errors path="lastName"/> <br>
     <input type="submit">
 </form:form>
 </body>
