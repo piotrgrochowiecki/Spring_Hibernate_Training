@@ -16,8 +16,8 @@
 <body>
 Add book:
 <form:form modelAttribute="book" method="post" action="/addBookByForm">
-    Title: <form:input path="title"/><br>
-    Rating: <form:input path="rating"/><br>
+    Title: <form:input path="title"/> <form:errors path="title"/> <br>
+    Rating: <form:input path="rating"/> <form:errors path="rating"/> <br>
     Description: <form:textarea path="description" cols="20" rows="20"/><br>
 <%--    Publisher: <form:select path="publisher.id" items="${publishers}" itemValue="id" itemLabel="name"/><br>--%>
     <input type="submit">

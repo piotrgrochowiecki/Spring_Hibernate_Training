@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
@@ -33,9 +34,9 @@ public class BookFormController {
     }
 
     @PostMapping("addBookByForm")
-    public String addBookByFormHandle(@ModelAttribute("book") Book book, BindingResult result) {
+    public String addBookByFormHandle(@ModelAttribute("book") @Valid Book book, BindingResult result) {
         if (result.hasErrors()) {
-            return "There has been an error! Go back and try again";
+            return "/addBookForm.jsp";
         }
         bookDao.save(book);
         return "redirect:/books/findAll";
