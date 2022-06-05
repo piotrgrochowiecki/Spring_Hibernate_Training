@@ -31,14 +31,14 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<Book> findBookByTitleQuery(String title);
 
     @Query("SELECT b FROM books b WHERE b.category = ?1")
-    List<Book> findBooksByCategoryQuery(String category);
+    List<Book> findBooksByCategoryQuery(Category category);
 
     @Query("SELECT b FROM books b WHERE b.rating BETWEEN ?1 AND ?2")
     List<Book> findBooksByRatingBetweenQuery(int rating1, int rating2);
 
     @Query("SELECT b FROM books b WHERE b.publisher = :publisher")
-    List<Book> findBooksByPublisherQuery(@Param("publisher") String publisher);
+    List<Book> findBooksByPublisherQuery(@Param("publisher") Publisher publisher);
 
     @Query("SELECT b FROM books b WHERE b.category = :category ORDER BY b.title")
-    List<Book> findBooksByCategoryOrderByTitleQuery(@Param("category") String category);
+    List<Book> findBooksByCategoryOrderByTitleQuery(@Param("category") Category category);
 }

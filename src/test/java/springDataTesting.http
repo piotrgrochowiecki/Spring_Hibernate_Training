@@ -1,3 +1,7 @@
+GET http://localhost:8080/springDataTest/book/findBooksByCategoryQuery/Computer%20Science
+Accept: application/json
+
+###
 GET http://localhost:8080/springDataTest/book/findBookByTitleQuery/Black%20Swan
 Accept: application/json
 

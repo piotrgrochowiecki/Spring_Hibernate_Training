@@ -66,4 +66,11 @@ public class SpringDataBookController {
         Optional<Book> book = bookRepository. findBookByTitleQuery(title);
         return book.toString();
     }
+
+    @GetMapping("findBooksByCategoryQuery/{categoryName}")
+    public String findBooksByCategoryQuery(@PathVariable String categoryName) {
+        Optional<Category> category = categoryRepository.findCategoryByName(categoryName);
+        List<Book> books = bookRepository.findBooksByCategoryQuery(category.get());
+        return books.toString();
+    }
 }
