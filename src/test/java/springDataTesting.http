@@ -1,0 +1,21 @@
+GET http://localhost:8080/springDataTest/book/findBookByTitleQuery/Black%20Swan
+Accept: application/json
+
+###
+GET http://localhost:8080/springDataTest/book/findBooksByAuthor/Hunt
+Accept: application/json
+
+###
+GET http://localhost:8080/springDataTest/book/findBooksByCategoryId/1
+Accept: application/json
+
+###
+GET http://localhost:8080/springDataTest/book/findBooksByCategory/Computer%20Science
+Accept: application/json
+
+###
+GET http://localhost:8080/springDataTest/book/findBookByTitle/Black%20Swan
+Accept: application/json
+
+###
+GET localhost:8080/springDataTest/book/findAll

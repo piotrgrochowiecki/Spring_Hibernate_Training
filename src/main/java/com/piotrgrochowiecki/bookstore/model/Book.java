@@ -37,6 +37,6 @@ public class Book {
     @NotNull
     private List<Author> authors = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
 }
